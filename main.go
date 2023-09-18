@@ -8,10 +8,12 @@ import (
 	"strings"
 )
 
+// for testing: go run . sample.txt result.txt
 func main() {
 	changeFile()
 }
-//read sample.txt args[0], change and save to result.txt 
+
+// read sample.txt args[0], change and save to result.txt
 func changeFile() {
 	args := os.Args[1:]
 	sampleFilePath := args[0]
