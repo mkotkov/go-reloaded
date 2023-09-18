@@ -104,7 +104,20 @@ func processText(input string) string {
 
 // clean extra spacing, double-spacing and hashtags (cap, low, etc.)
 func clean(input string) string {
-	re := regexp.MustCompile(`\s+([,.;:!?])|\s+\(([^)]+)\)|('...''!?')|\w\s{2}`)
-	output := re.ReplaceAllString(input, "$1")
+	re := regexp.MustCompile(`'\s*([^']*)\s*'`) // correct quotes
+	output := re.ReplaceAllString(input, `'$1'`)
+
+	re = regexp.MustCompile(`\s*([\.,?!;':])`)
+	output = re.ReplaceAllString(output, `$1`)
+
+	re = regexp.MustCompile(`:`) // correct dots
+	output = re.ReplaceAllString(output, `: `)
+
+	re = regexp.MustCompile(`\s([,.;:!?])|\s+\(([^)]+)\)|('...''!?')|\s{2}`)
+	output = re.ReplaceAllString(output, "$1")
+
+	re = regexp.MustCompile(`\s,\s|\s,|,\s|,`) // correct comma
+	output = re.ReplaceAllString(output, `, `)
+
 	return output
 }
