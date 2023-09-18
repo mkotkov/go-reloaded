@@ -110,7 +110,7 @@ func clean(input string) string {
 	re = regexp.MustCompile(`\s*([\.,?!;':])`)
 	output = re.ReplaceAllString(output, `$1`)
 
-	re = regexp.MustCompile(`:`) // correct dots
+	re = regexp.MustCompile(`:\s*`) // correct dots
 	output = re.ReplaceAllString(output, `: `)
 
 	re = regexp.MustCompile(`\s([,.;:!?])|\s+\(([^)]+)\)|('...''!?')|\s{2}`)
